@@ -7,42 +7,36 @@ namespace UsageCollections
     {
         static void Main(string[] args)
         {
-            SortedList lstEmployé = new SortedList();
-            lstEmployé.Add("372288Z", new Employé { Nom = "Fall ",
-                PréNom = "Racine ",
-                Matricule = "372288Z" });
-            Employé layssa = new Employé()
+            SortedList lstEtudiant = new SortedList();
+            Console.WriteLine("Bienvenue dans votre programme de saisie de données des informations des étudiants");
+            Console.WriteLine("Veuillez saisir le nombre d'étudiants à enregistrer");
+            int nombreEtudiant = int.Parse(Console.ReadLine());
+            Console.WriteLine("Saisir les informations des etudiants : ");
+            for (int i = 0; i < nombreEtudiant; i++)
             {
-                Nom = "Diaw ",
-                PréNom= "Layssa ",
-                Matricule = "501603A"
-                };
-            Employé ngor = new Employé()
+                Console.WriteLine("Etudiant " + (i + 1));
+                Console.WriteLine("Saisir le nom de l'étudiant : ");
+                string nom = Console.ReadLine();
+                Console.WriteLine("Saisir le prénom de l'étudiant : ");
+                string prenom = Console.ReadLine();
+                Console.WriteLine("Saisir le numéro d'ordre de l'étudiant : ");
+                string no = Console.ReadLine();
+                Console.WriteLine("Saisir la note du contrôle continu de l'étudiant : ");
+                string noteCC = Console.ReadLine();
+                Console.WriteLine("Saisir la note du devoir de l'étudiant : ");
+                string noteDevoir = Console.ReadLine();
+                Etudiant etudiant = new Etudiant()
                 {
-                Nom = "Sène ",
-                PréNom = "Ngor ",
-                Matricule = "500125B"
+                    Nom = nom,
+                    PreNom = prenom,
+                    NO = no,
+                    NoteCC = noteCC,
+                    NoteDevoir = noteDevoir
                 };
-            lstEmployé.Add(layssa.Matricule, layssa);
-            lstEmployé.Add(ngor.Matricule, ngor);
-
-            Employé unEmployé = (Employé)lstEmployé["372288Z"];
-
-            if (unEmployé != null)
-            {
-                Console.WriteLine($"Matricule:{unEmployé.Matricule}, Prénom: {unEmployé.PréNom}, Nom: {unEmployé.Nom}, ");
-
-                }
-
-            Console.WriteLine(  "Appuyer sur Entrée pour afficher la liste des employés ");
-            Console.ReadLine();
-
-            foreach (DictionaryEntry employé in lstEmployé)
-            {
-                Employé autreEmployé = (Employé)employé.Value;
-                Console.WriteLine($"Matricule: {autreEmployé.Matricule}, PréNom: {autreEmployé.PréNom},Nom: {autreEmployé.Nom}");
+                lstEtudiant.Add(etudiant.NO, etudiant);
+                Console.WriteLine("Les informations de l'étudiant sont : ");
+                Console.WriteLine($"Nom : {etudiant.Nom}, Prénom : {etudiant.PreNom}, Numéro : {etudiant.NO}, Note du contrôle continu : {etudiant.NoteCC}, Note du devoir : {etudiant.NoteDevoir}");
             }
-            Console.ReadLine();
         }
     }
 }
