@@ -22,9 +22,9 @@ namespace UsageCollections
                 Console.WriteLine("Saisir le numéro d'ordre de l'étudiant : ");
                 string no = Console.ReadLine();
                 Console.WriteLine("Saisir la note du contrôle continu de l'étudiant : ");
-                string noteCC = Console.ReadLine();
+                double noteCC = double.Parse(Console.ReadLine());
                 Console.WriteLine("Saisir la note du devoir de l'étudiant : ");
-                string noteDevoir = Console.ReadLine();
+                double noteDevoir = double.Parse(Console.ReadLine());
                 Etudiant etudiant = new Etudiant()
                 {
                     Nom = nom,
@@ -37,6 +37,36 @@ namespace UsageCollections
                 Console.WriteLine("Les informations de l'étudiant sont : ");
                 Console.WriteLine($"Nom : {etudiant.Nom}, Prénom : {etudiant.PreNom}, Numéro : {etudiant.NO}, Note du contrôle continu : {etudiant.NoteCC}, Note du devoir : {etudiant.NoteDevoir}");
             }
+
+            Console.WriteLine("Veuillez choisir le nombre de lignes par page (entre 1 et 15) : ");
+            int lignesParPage = int.Parse(Console.ReadLine());
+            if (lignesParPage < 1 || lignesParPage > 15)
+            {
+                lignesParPage = 5;
+            }
+
+            int totalEtudiants = lstEtudiant.Count;
+            int totalPages = (int)Math.Ceiling((double)totalEtudiants / lignesParPage);
+            double moyenneClasse = 0;
+
+            for (int page = 1; page <= totalPages; page++)
+            {
+                Console.WriteLine($"Page {page}/{totalPages}");
+                for (int i = (page - 1) * lignesParPage; i < page * lignesParPage && i < totalEtudiants; i++)
+                {
+                    Etudiant etudiant = (Etudiant)lstEtudiant.GetByIndex(i);
+                    double moyenne = etudiant.NoteCC * 0.33 + etudiant.NoteDevoir * 0.67;
+                    moyenneClasse += moyenne;
+                    Console.WriteLine($"Numéro : {etudiant.NO}, Nom : {etudiant.Nom}, Prénom : {etudiant.PreNom}, NoteCC : {etudiant.NoteCC}, NoteDevoir : {etudiant.NoteDevoir}, Moyenne : {moyenne}");
+                }
+                Console.WriteLine("Appuyez sur une touche pour continuer...");
+                Console.ReadKey();
+            }
+
+            moyenneClasse /= totalEtudiants;
+            Console.WriteLine($"Moyenne de la classe : {moyenneClasse}");
+            Console.WriteLine("Appuyez sur une touche pour sortir...");
+            Console.ReadKey();
         }
     }
 }

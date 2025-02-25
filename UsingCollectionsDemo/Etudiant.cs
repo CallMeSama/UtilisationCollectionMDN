@@ -10,7 +10,7 @@ namespace UsageCollections
         public string Nom { get; set; }
         public string PreNom { get; set; }
         public string NO { get; set; }
-        public string NoteCC { get; set; }
-        public string NoteDevoir { get; set; }
+        public double NoteCC { get; set; }
+        public double NoteDevoir { get; set; }
     }
 }
